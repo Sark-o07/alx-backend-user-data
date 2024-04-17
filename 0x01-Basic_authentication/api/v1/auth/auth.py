@@ -10,12 +10,13 @@ class Auth:
     """
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ Determines wether a given path needs authentication
+        """
+        Determines wether a given path needs authentication
         Args:
-            path (str): the url path to be checked
-            excluded_paths (list): a list of url path that needs no validation
+            - path (str): the url path to be checked
+            - excluded_paths (list): a list of url path that needs no validation
         Return:
-            True if path needs authentication to be validated else False
+            - True if path needs authentication to be validated else False
         """
 
         if path is None:
@@ -37,7 +38,17 @@ class Auth:
         return True
 
     def authorization_header(self, request=None) -> str:
+        """ 
+        Returns the authorization header from the request object
+        Arg:
+            - request (obj): An object representing the HTTP request.
+        """
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
+        """
+        Returns User instance based on information from the request object
+        Arg:
+            - request (obj): An object representing the HTTP request.
+        """
         return None
