@@ -14,7 +14,8 @@ class Auth:
         Determines wether a given path needs authentication
         Args:
             - path (str): the url path to be checked
-            - excluded_paths (list): a list of url path that needs no validation
+            - excluded_paths (list): a list of url path that
+            - do not require authentication.
         Return:
             - True if path needs authentication to be validated else False
         """
@@ -38,7 +39,7 @@ class Auth:
         return True
 
     def authorization_header(self, request=None) -> str:
-        """ 
+        """
         Returns the authorization header from the request object
         Arg:
             - request (obj): An object representing the HTTP request.
