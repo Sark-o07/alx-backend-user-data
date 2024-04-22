@@ -30,3 +30,14 @@ def user_login() -> dict:
             resp.set_cookie(session_name, session_id)
             return resp
     return jsonify({"error": "wrong password"}), 401
+
+
+@app_views.route('/auth_session/logout', methods=['DELETE'],
+                 strict_slashes=False)
+def user_logout() -> dict:
+    """Handle user logout / deletes session_id"""
+    from api.v1.app import auth
+    deleted = auth.destroy_session(request)
+    if not deleted:
+        abort(404)
+    return jsonify({}), 200
