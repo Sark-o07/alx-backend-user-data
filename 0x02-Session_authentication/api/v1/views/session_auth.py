@@ -7,8 +7,10 @@ from flask import abort, jsonify, request
 from models.user import User
 
 
-@app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
+@app_views.route('/auth_session/login', methods=['POST'],
+                 strict_slashes=False)
 def user_login() -> dict:
+    """Handle user login and returns the user object"""
     email = request.form.get('email', '')
     password = request.form.get('password', '')
 
