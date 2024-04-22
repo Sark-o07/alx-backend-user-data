@@ -2,7 +2,10 @@
 """
 A session Auth module
 """
+from typing import TypeVar
 from uuid import uuid4
+
+from models.user import User
 from api.v1.auth.auth import Auth
 
 
@@ -24,3 +27,10 @@ class SessionAuth(Auth):
             return None
         user_id = self.user_id_by_session_id.get(session_id)
         return user_id
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """Returns a User instance based on a cookie value"""
+        session_cookie = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_cookie)
+        user = User.get(user_id)
+        return user
