@@ -66,6 +66,6 @@ class DB:
         except NoResultFound:
             raise ValueError
         for k, v in kwargs.items():
-            if k not in user.__dict__:
+            if k not in User.__dict__:
                 raise ValueError
             setattr(user, k, v)
