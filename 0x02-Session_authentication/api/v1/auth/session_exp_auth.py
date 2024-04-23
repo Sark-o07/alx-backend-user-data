@@ -36,6 +36,13 @@ class SessionExpAuth(SessionAuth):
         return session_id
 
     def user_id_for_session_id(self, session_id: str = None) -> str:
+        """
+        Returns a user ID based on a session ID
+        Args:
+            session_id (str): session ID
+        Return:
+            user id or None if session_id is None or not a string
+        """
         if session_id is None:
             return None
         user_details = self.user_id_by_session_id.get(session_id)
