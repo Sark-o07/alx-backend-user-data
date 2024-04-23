@@ -9,10 +9,10 @@ from models.user import User
 
 @app_views.route('/auth_session/login', methods=['POST'],
                  strict_slashes=False)
-def user_login() -> dict:
+def user_login():
     """Handle user login and returns the user object"""
-    email = request.form.get('email', '')
-    password = request.form.get('password', '')
+    email = request.form.get('email')
+    password = request.form.get('password')
 
     if email is None or email == '':
         return jsonify({"error": "email missing"}), 400
@@ -34,7 +34,7 @@ def user_login() -> dict:
 
 @app_views.route('/auth_session/logout', methods=['DELETE'],
                  strict_slashes=False)
-def user_logout() -> dict:
+def user_logout():
     """Handle user logout / deletes session_id"""
     from api.v1.app import auth
     deleted = auth.destroy_session(request)
