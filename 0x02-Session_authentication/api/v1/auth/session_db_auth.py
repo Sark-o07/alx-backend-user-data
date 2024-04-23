@@ -35,9 +35,10 @@ class SessionDBAuth(SessionExpAuth):
             user id or None if session_id is None or not a string
         """
         UserSession.load_from_file()
-        user_id = UserSession.search({"session_id": session_id})
-        if user_id:
-            return user_id
+        users = UserSession.search({"session_id": session_id})
+        if users:
+            for user in users:
+                return user.user_id
         return None
 
     def destroy_session(self, request=None):
