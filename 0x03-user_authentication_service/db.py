@@ -31,7 +31,13 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> TypeVar('User'):
-        """save the user to the database."""
+        """save the user to the database.
+        Args:
+            email (str): user's email address
+            hashed_password (str): password hashed by bcrypt's hashpw
+        Return:
+            Newly created User object
+        """
         user = User(email=email, hashed_password=hashed_password)
         self._session.add(user)
         self._session.commit()
