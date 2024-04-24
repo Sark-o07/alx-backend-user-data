@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Auth Module
 """
+import uuid
 from user import User
 import bcrypt
 from db import DB
@@ -45,3 +46,7 @@ class Auth:
             return bcrypt.checkpw(provided_pswd_bytes, user.hashed_password)
         except NoResultFound:
             return False
+
+    def _generate_uuid() -> str:
+        """ Returns a string representation of a new UUID."""
+        return str(uuid.uuid4())
