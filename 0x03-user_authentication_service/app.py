@@ -26,7 +26,7 @@ def users():
         return jsonify({"email": user.email, "message": "user created"})
 
 
-@app.route('/login', methods=['POST'], strict_slashes=False)
+@app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login():
     """ create a new session for the user, store it the session ID
     as a cookie with key "session_id" on the response and
@@ -43,4 +43,4 @@ def login():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
+    app.run(host="0.0.0.0", port="5000", debug=True)
