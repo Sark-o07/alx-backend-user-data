@@ -70,3 +70,4 @@ class DB:
             if k not in User.__dict__:
                 raise ValueError
             setattr(user, k, v)
+        self._session.commit()
