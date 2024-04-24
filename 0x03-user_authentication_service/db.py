@@ -64,7 +64,7 @@ class DB:
         """
         try:
             user = self.find_user_by(id=user_id)
-        except NoResultFound:
+        except:
             raise ValueError
         for k, v in kwargs.items():
             if k not in User.__dict__:
