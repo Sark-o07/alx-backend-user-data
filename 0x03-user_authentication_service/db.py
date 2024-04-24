@@ -62,20 +62,10 @@ class DB:
         """update the user`s attributes as passed in the method`s
         arguments then commit changes to the database
         """
-        # user = self.find_user_by(id=user_id)
-        # for k, v in kwargs.items():
-        #     if k not in user.__dict__:
-        #         raise ValueError
-        #     setattr(user, k, v)
-        # self._session.commit()
-        # return
-        try:
-            usr = self.find_user_by(id=user_id)
-        except NoResultFound:
-            raise ValueError()
+        user = self.find_user_by(id=user_id)
         for k, v in kwargs.items():
-            if hasattr(usr, k):
-                setattr(usr, k, v)
-            else:
+            if k not in user.__dict__:
                 raise ValueError
+            setattr(user, k, v)
         self._session.commit()
+        return
