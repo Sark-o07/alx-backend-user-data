@@ -62,12 +62,9 @@ class DB:
         """update the user`s attributes as passed in the method`s
         arguments then commit changes to the database
         """
-        try:
-            user = self.find_user_by(id=user_id)
-        except:
-            raise ValueError
+        user = self.find_user_by(id=user_id)
         for k, v in kwargs.items():
-            if k not in User.__dict__:
+            if k not in user.__dict__:
                 raise ValueError
             setattr(user, k, v)
         self._session.commit()
