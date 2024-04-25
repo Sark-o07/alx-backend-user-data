@@ -48,7 +48,7 @@ class DB:
 
     def find_user_by(self, **kwargs) -> User:
         """ Finds the first row found in the users table as filtered by
-        the method`s input arguments.
+        the method's input arguments.
         """
         for k in kwargs.keys():
             if k not in User.__dict__:
@@ -59,7 +59,7 @@ class DB:
         return user
 
     def update_user(self, user_id: int, **kwargs):
-        """update the user`s attributes as passed in the method`s
+        """update the user`s attributes as passed in the method's
         arguments then commit changes to the database
         """
         user = self.find_user_by(id=user_id)
