@@ -1,5 +1,5 @@
 __pycache__/
 *.pyc
-main*
+main_*
 .db*
 a.db
