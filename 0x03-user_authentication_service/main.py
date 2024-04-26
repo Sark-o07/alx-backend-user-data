@@ -21,6 +21,7 @@ def register_user(email: str, password: str) -> None:
         assert(resp.status_code == 400)
         assert(resp.json() == {"message": "email already registered"})
 
+
 def log_in_wrong_password(email: str, password: str) -> None:
     """ Tests log in with wrong credentials
     Args:
@@ -34,6 +35,7 @@ def log_in_wrong_password(email: str, password: str) -> None:
     assert(resp.status_code == 401)
     if resp.status_code == 200:
         assert(resp.json() == {"email": email, "message": "logged in"})
+
 
 def profile_unlogged() -> None:
     """
