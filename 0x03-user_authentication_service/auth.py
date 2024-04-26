@@ -29,8 +29,19 @@ class Auth:
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
-        """ take mandatory email and password, registers the user in the db.
-        Returns the user object.
+        """Register user into database
+
+        Parameters
+        ---------
+        email: str
+            user email
+        hashed_password: str
+            user hashed or hidden password
+
+        Returns
+        -------
+        object
+            user object
         """
         try:
             user = self._db.find_user_by(email=email)
@@ -43,7 +54,18 @@ class Auth:
 
     def valid_login(self, email: str, password: str) -> bool:
         """Checks if email and password are valid.
-        Returns True if valid else false.
+
+        Parameters
+        ----------
+        email: str
+            user email
+        password: str
+            user password
+
+        Returns
+        -------
+        Bool
+            True if valid else false.
         """
         try:
             user = self._db.find_user_by(email=email)
@@ -53,8 +75,17 @@ class Auth:
             return False
 
     def create_session(self, email: str) -> str:
-        """It takes an email string argument
-        and returns the session ID as a string.
+        """It creates session_id for a user
+
+        Parameters
+        ----------
+        email: str
+            user email
+
+        Returns
+        -------
+        str
+            the session ID as a string.
         """
         try:
             user = self._db.find_user_by(email=email)
@@ -65,8 +96,17 @@ class Auth:
             return None
 
     def get_user_from_session_id(self, session_id: str) -> User:
-        """ It takes a single session_id string argument and
-        returns the corresponding User or None
+        """ It gets user from session ID
+
+        Parameters
+        ----------
+        session_id: str
+            user session_id
+
+        Returns
+        -------
+        User or None
+            the corresponding User or None
         """
         if not session_id:
             return None
@@ -75,3 +115,20 @@ class Auth:
         except NoResultFound:
             return None
         return user
+
+    def destroy_session(self, user_id: str):
+        """ It removes User's session_id
+
+        Parameters
+        ----------
+        user_id: str
+            user ID
+
+        Returns
+        -------
+        None
+        """
+        try:
+            self._db.update_user(user_id, session_id=None)
+        except Exception:
+            return None
