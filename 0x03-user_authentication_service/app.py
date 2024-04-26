@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask, abort, jsonify, request
+from flask import Flask, abort, jsonify, redirect, request, url_for
 from auth import Auth
 
 
@@ -40,6 +40,21 @@ def login():
     resp = jsonify({"email": f"{email}", "message": "logged in"})
     resp.set_cookie("session_id", session_id)
     return resp
+
+
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout():
+    """Finds the user with the requested session ID.
+    If the user exists destroy the session and redirect
+    the user to GET /. If the user does not exist,
+    respond with a 403 HTTP status.
+    """
+    session_id = request.cookies.get("session_id")
+    user = AUTH.get_user_from_session_id(session_id)
+    if not user:
+        abort(403)
+    AUTH.destroy_session(user.id)
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":
