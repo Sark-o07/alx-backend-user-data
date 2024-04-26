@@ -57,7 +57,7 @@ def logout():
     return redirect(url_for("index"))
 
 
-@app.route('/profile', methods=['DELETE'], strict_slashes=False)
+@app.route('/profile', methods=['GET'], strict_slashes=False)
 def profile():
     """
     Display User Information
